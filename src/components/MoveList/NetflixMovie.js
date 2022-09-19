@@ -27,7 +27,6 @@ function NetflixMovie() {
     fetch()
   },[])
   const movieData = useSelector(allMovieData);
-  console.log(movieData)
   const handleOpen = (data) =>{
     console.log(data)
     setData(data)

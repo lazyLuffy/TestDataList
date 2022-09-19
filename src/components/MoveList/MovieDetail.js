@@ -19,7 +19,6 @@ const style = {
   };
 
 function MovieDetail({open,handleClose,data}) {
-    console.log(data)
     const dispatch = useDispatch()
     useEffect(()=>{
         const fetch = async ()=>{
@@ -33,7 +32,6 @@ function MovieDetail({open,handleClose,data}) {
         fetch()
     },[data])
     const each = useSelector(singleData)
-    console.log(each,'MODEL')
   return (
     <div>
         

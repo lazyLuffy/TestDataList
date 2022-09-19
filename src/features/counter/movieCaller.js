@@ -32,7 +32,6 @@ export const movieSlice = createSlice({
       state.singleMovie = payload;
     },
     fetchSearch:(state,{payload}) =>{
-      console.log(payload)
       state.search = payload
     }
   },

@@ -16,7 +16,6 @@ function MovieList() {
   const [open,setOpen] = useState(false)
   const [data,setData] = useState(null)
   const search = useSelector(searchData)
-  console.log(search,"after dispatch")
   const [page,setPage] = useState(1)
   const[len,setLen]=useState(null)
   const movieData = useSelector(allMovieData);
@@ -26,7 +25,6 @@ function MovieList() {
       .catch((err)=>{
         console.log(err)
       })
-      console.log(response)
       dispatch(fetchAllMovie(response.data))
       setLen(response.data.Search)
     }
@@ -41,7 +39,6 @@ function MovieList() {
     setOpen(false)
   }
 
-  console.log(movieData,"after Searc")
   return (
     <div class='container d-flex justify-content-between  align-items-center flex-wrap'>
         {movieData && movieData.Response!=='False'  ? 
@@ -54,7 +51,8 @@ function MovieList() {
                 <Box sx={{
                   padding:'5px',
                   margin:'auto'
-                }}>
+        
+                }}key={imdbID}>
                   <Card sx={{ width:320, marginTop:'10px',backgroundColor:'lightgray' }} >
                     <CardMedia
                       component="img"
