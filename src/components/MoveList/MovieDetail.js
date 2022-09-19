@@ -22,7 +22,7 @@ function MovieDetail({open,handleClose,data}) {
     const dispatch = useDispatch()
     useEffect(()=>{
         const fetch = async ()=>{
-            const response = await movieApi.get(`http://www.omdbapi.com/?i=${data}&apikey=15ae9fea`)
+            const response = await movieApi.get(`http://www.omdbapi.com/?i=${data?data:'tt3896198'}&apikey=15ae9fea`)
             .catch((err)=>{
                 console.log(err)
             })
