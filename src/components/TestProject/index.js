@@ -20,32 +20,24 @@ const DataTable = () => {
     try {
       // Fetch people data based on search query
       const searchUrl = searchQuery ? `?search=${searchQuery}` : "";
-      const pageData = page != 0 ? `?page=${page}` : "";
-      console.log(pageData, "pageData>>>>>>>");
-      const peopleResponse = await axios.get(
-        SWAPI_ENDPOINT_PEOPLE + pageData + searchUrl
-      );
+
+      const peopleResponse = await axios.get(SWAPI_ENDPOINT_PEOPLE + searchUrl);
       setPeopleData(peopleResponse.data.results);
     } catch (error) {
       setError(true);
     }
 
     setLoading(false);
-  });
+  }, 1000);
 
   useEffect(() => {
     return () => debouncedFetchData();
   }, [searchQuery, page]);
 
   const handleSearchChange = (e) => {
-    handleDebouce(e);
+    setSearchQuery(e.target.value);
     setSortKey(null); // Clear sorting on search
   };
-
-  const handleDebouce = (e) =>
-    _debounce(() => {
-      setSearchQuery(e.target.value);
-    }, 1000);
 
   const handleSort = (key) => {
     setSortKey(key);
@@ -103,9 +95,12 @@ const DataTable = () => {
     }
   };
 
-  function handlePage(value) {
-    console.log(value, "vaue>>>>>");
-    setPage(value);
+  async function handlePage(value) {
+    setLoading(true);
+    const pageUrl = `?page=${value}`;
+    const response = await axios.get(SWAPI_ENDPOINT_PEOPLE + pageUrl);
+    setPeopleData(response.data.results);
+    setLoading(false);
   }
 
   return (
