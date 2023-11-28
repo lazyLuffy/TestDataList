@@ -31,20 +31,21 @@ const DataTable = () => {
     }
 
     setLoading(false);
-  },);
+  });
 
   useEffect(() => {
     return () => debouncedFetchData();
   }, [searchQuery, page]);
 
   const handleSearchChange = (e) => {
-    handleDebouce(e)
+    handleDebouce(e);
     setSortKey(null); // Clear sorting on search
   };
 
-  const handleDebouce =(e)=> _debounce(()=>{
-    setSearchQuery(e.target.value);
-  },1000)
+  const handleDebouce = (e) =>
+    _debounce(() => {
+      setSearchQuery(e.target.value);
+    }, 1000);
 
   const handleSort = (key) => {
     setSortKey(key);
@@ -102,13 +103,10 @@ const DataTable = () => {
     }
   };
 
-  function handlePage(value){
-    console.log(value , 'vaue>>>>>')
-    setPage(value)
+  function handlePage(value) {
+    console.log(value, "vaue>>>>>");
+    setPage(value);
   }
-
- 
-
 
   return (
     <div className="container my-4 ">
@@ -226,45 +224,26 @@ const DataTable = () => {
             ))}
           </tbody>
           <div className="my-2 d-flex justify-content-between gap-2">
-            <button
-              className="btn btn-primary"
-              onClick={()=>handlePage(1)}
-            >
+            <button className="btn btn-primary" onClick={() => handlePage(1)}>
               1
             </button>
-            <button
-              className="btn btn-secondary"
-              onClick={()=>handlePage(2)}
-            >
-              2 
+            <button className="btn btn-secondary" onClick={() => handlePage(2)}>
+              2
             </button>
 
-            <button
-              className="btn btn-primary"
-              onClick={()=>handlePage(3)}
-            >
+            <button className="btn btn-primary" onClick={() => handlePage(3)}>
               3
             </button>
-            <button
-              className="btn btn-secondary"
-              onClick={()=>handlePage(4)}
-            >
-              4 
+            <button className="btn btn-secondary" onClick={() => handlePage(4)}>
+              4
             </button>
 
-            <button
-              className="btn btn-primary"
-              onClick={()=>handlePage(5)}
-            >
+            <button className="btn btn-primary" onClick={() => handlePage(5)}>
               5
             </button>
-            <button
-              className="btn btn-secondary"
-              onClick={()=>handlePage(6)}
-            >
-              6 
+            <button className="btn btn-secondary" onClick={() => handlePage(6)}>
+              6
             </button>
-            
           </div>
         </table>
       </div>
