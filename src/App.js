@@ -19,6 +19,7 @@ import { useDispatch } from "react-redux";
 import { fetchAllMovie } from "./features/counter/movieCaller";
 import IndiaMovie from "./components/MoveList/IndiaMovie";
 import NetflixMovie from "./components/MoveList/NetflixMovie";
+import DataTable from "./components/TestProject";
 
 
 
@@ -26,12 +27,14 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Header/>
+       <div className="container-fluid bg-danger">
+          <h1 className="text-center py-2 text-light fw-bold fs-2">
+          DataTable Test
+          </h1>
+       </div>
           <Routes>
-            <Route path="/" exact element={<MovieList/>}/>
-            <Route path="/movie-detail" element={<MovieDetail/>}/>
-            <Route path="/india" element={<IndiaMovie/>}/>
-            <Route path="/netflix" element={<NetflixMovie/>}/>
+            <Route path="/" exact element={<DataTable/>}/>
+          
           </Routes>
         <Footer/>
       </Router>
