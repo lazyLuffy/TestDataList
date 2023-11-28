@@ -11,6 +11,7 @@ const DataTable = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [sortKey, setSortKey] = useState(null);
   const [android, SetAndroid] = useState(0);
+  let [page, setPage] = useState(1);
 
   const debouncedFetchData = _debounce(async () => {
     setLoading(true);
@@ -19,23 +20,31 @@ const DataTable = () => {
     try {
       // Fetch people data based on search query
       const searchUrl = searchQuery ? `?search=${searchQuery}` : "";
-      const peopleResponse = await axios.get(SWAPI_ENDPOINT_PEOPLE + searchUrl);
+      const pageData = page != 0 ? `?page=${page}` : "";
+      console.log(pageData, "pageData>>>>>>>");
+      const peopleResponse = await axios.get(
+        SWAPI_ENDPOINT_PEOPLE + pageData + searchUrl
+      );
       setPeopleData(peopleResponse.data.results);
     } catch (error) {
       setError(true);
     }
 
     setLoading(false);
-  }, 1000);
+  },);
 
   useEffect(() => {
     return () => debouncedFetchData();
-  }, [searchQuery]);
+  }, [searchQuery, page]);
 
   const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+    handleDebouce(e)
     setSortKey(null); // Clear sorting on search
   };
+
+  const handleDebouce =(e)=> _debounce(()=>{
+    setSearchQuery(e.target.value);
+  },1000)
 
   const handleSort = (key) => {
     setSortKey(key);
@@ -76,6 +85,8 @@ const DataTable = () => {
     );
   }
 
+  console.log(page, '""""""PAGE');
+
   // Render error state
   if (error) {
     return <i className="fas fa-exclamation-circle fs-1 text-danger"></i>;
@@ -90,6 +101,14 @@ const DataTable = () => {
       return <i class="fa fa-user-circle fs-4 m-2" aria-hidden="true"></i>;
     }
   };
+
+  function handlePage(value){
+    console.log(value , 'vaue>>>>>')
+    setPage(value)
+  }
+
+ 
+
 
   return (
     <div className="container my-4 ">
@@ -206,6 +225,47 @@ const DataTable = () => {
               </tr>
             ))}
           </tbody>
+          <div className="my-2 d-flex justify-content-between gap-2">
+            <button
+              className="btn btn-primary"
+              onClick={()=>handlePage(1)}
+            >
+              1
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={()=>handlePage(2)}
+            >
+              2 
+            </button>
+
+            <button
+              className="btn btn-primary"
+              onClick={()=>handlePage(3)}
+            >
+              3
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={()=>handlePage(4)}
+            >
+              4 
+            </button>
+
+            <button
+              className="btn btn-primary"
+              onClick={()=>handlePage(5)}
+            >
+              5
+            </button>
+            <button
+              className="btn btn-secondary"
+              onClick={()=>handlePage(6)}
+            >
+              6 
+            </button>
+            
+          </div>
         </table>
       </div>
     </div>
